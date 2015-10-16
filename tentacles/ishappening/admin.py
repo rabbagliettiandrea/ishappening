@@ -11,7 +11,7 @@ site = AdminSite()
 
 
 class DocumentAdmin(LinkOnSiteMixin, ModelAdmin):
-    fields = ['title', 'html', 'approx_traffic', 'country_id', 'published',
+    fields = ['title', 'picture_url', 'snippet', 'html', 'approx_traffic', 'country_id', 'published',
               'internal_url', 'external_url']
     list_display = ['title', 'link_on_site']
 
