@@ -5,7 +5,7 @@ from krakenv.tentacle import Tentacle
 
 
 TENTACLES = {
-    'andre.ishappening.today': Tentacle(
+    'andre.ishappening.world': Tentacle(
         path='wraith.tentacles.ishappening', database='ishappening'),
 }
 

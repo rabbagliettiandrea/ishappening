@@ -24,5 +24,5 @@ class DocumentsSitemap(Sitemap):
 
 
 sitemap_dict = {
-    'documents': DocumentsSitemap
+    'documents': DocumentsSitemap,
 }

@@ -19,6 +19,9 @@ class Document(TimedatedModel):
     internal_url = URLField(db_index=True, unique=True, max_length=600)
     external_url = URLField(db_index=True, unique=True, max_length=600)
 
+    class Meta:
+        ordering = ['-published']
+
     def __unicode__(self):
         return self.title
 

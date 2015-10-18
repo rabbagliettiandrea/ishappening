@@ -24,7 +24,13 @@ body {
 .navbar-fixed-top {
   border: 0;
 }
+.navbar-inverse .navbar-brand {
+  color: #e5e5e5;
 
+}
+.navbar-inverse .navbar-brand:hover {
+  color: #ffffff;
+}
 /*
  * Sidebar
  */

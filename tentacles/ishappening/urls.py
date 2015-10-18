@@ -9,6 +9,7 @@ from wraith.tentacles.ishappening.sitemap import sitemap_dict
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^help/$', views.help, name='help'),
     url(r'^$', views.index, name='index_generic'),
     url(r'^(?P<country_slug>[\w-]+)/$', views.index, name='index_country'),
     url(r'^(?P<country_slug>[\w-]+)/(?P<internal_url>.+)/$', views.serve_document, name='serve_document'),

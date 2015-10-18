@@ -1,0 +1,28 @@
+<nav class="text-center">
+
+    <ul class="pagination">
+        {% if documents.has_previous %}
+            <li>
+                <a href="?page={{ documents.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+{#        {% for page_number in documents.paginator.page_range %}#}
+{#            <li {% if page_number == documents.number %}class="active"{% endif %}>#}
+{#                <a href="?page={{ page_number }}">{{ page_number }}</a>#}
+{#            </li>#}
+{#        {% endfor %}#}
+        {% if documents.has_next %}
+            <li>
+                <a href="?page={{ documents.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+
+    <div>
+        <small>{{ documents.paginator.count }} total documents.</small>
+    </div>
+</nav>

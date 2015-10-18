@@ -3,9 +3,12 @@
 from __future__ import unicode_literals, division, absolute_import
 from Queue import Queue
 from datetime import datetime
+from httplib import HTTPException
 from multiprocessing.pool import ThreadPool
 from urlparse import urlparse
 from bs4 import BeautifulSoup
+from django.db import IntegrityError
+from django.db.models import Q
 import feedparser
 import requests
 from requests.exceptions import RequestException
@@ -15,23 +18,25 @@ from wraith.tentacles.ishappening.models import Document
 
 
 DELOCALIZE_RESOURCES = re.compile(r'="(/[^/].*?)"')
+T_Q = Queue()
 
 
-def _work(t):
-    q = t[0]
-    country_id = t[1]
+def _work(country_id):
+    count = 0
     try:
         response_hottrends = requests.get('https://www.google.com/trends/hottrends/atom/feed?pn=p%s' % country_id)
-        serp = feedparser.parse(response_hottrends.content)['entries']
-        for result in serp[:5]:
+        results = feedparser.parse(response_hottrends.content)['entries']
+        for result in results:
             html_title = result.get('ht_news_item_title')
             external_url = result.get('ht_news_item_url')
-            if not html_title or not external_url or \
-                    Document.objects.using('ishappening').filter(external_url=external_url).exists():
+            if not html_title or not external_url:
                 continue
             parsed_uri = urlparse(external_url)
             internal_url = parsed_uri.query and '%s?%s' % (parsed_uri.path.lstrip('/'), parsed_uri.query) \
                            or parsed_uri.path.lstrip('/')
+            if Document.objects.using('ishappening').filter(
+                    Q(internal_url=internal_url) | Q(external_url=external_url)).exists():
+                continue
             title_soup = BeautifulSoup(html_title)
             title = title_soup.get_text()
             html_snippet = result.get('ht_news_item_snippet')
@@ -41,19 +46,13 @@ def _work(t):
             published = datetime.fromtimestamp(
                 time.mktime(result.get('published_parsed')))
             picture_url = result.get('ht_picture', '')
-            html = unicode(BeautifulSoup(requests.get(external_url).content))
+            try:
+                html = unicode(BeautifulSoup(requests.get(external_url).content))
+            except RequestException:
+                continue
             html_cleaned = DELOCALIZE_RESOURCES.sub(
                 r'="%s://%s\g<1>"' % (parsed_uri.scheme, parsed_uri.netloc) , html)
-            q.put({
-                'title': title,
-                'picture_url': picture_url,
-                'external_url': external_url,
-                'internal_url': internal_url,
-                'country_id': country_id,
-                'approx_traffic': approx_traffic,
-                'published': unicode(published)
-            })
-            if not Document.objects.using('ishappening').filter(external_url=external_url).exists():
+            try:
                 Document.objects.using('ishappening').create(
                     title=title,
                     picture_url=picture_url,
@@ -65,21 +64,19 @@ def _work(t):
                     approx_traffic=approx_traffic,
                     published=published
                 )
-    except RequestException:
+            except IntegrityError:
+                continue
+            count += 1
+    except (RequestException, HTTPException):
         pass
+    T_Q.put(count)
 
 
 def grab_documents(clear_before):
-    if clear_before:
-        Document.objects.using('ishappening').delete()
-    response = requests.get('http://hawttrends.appspot.com/api/terms/')
-    hawttrends = response.json()
-    q = Queue()
+    clear_before and Document.objects.using('ishappening').delete()
+    hawttrends = requests.get('http://hawttrends.appspot.com/api/terms/').json()
     pool = ThreadPool(processes=len(hawttrends))
-    pool.map(_work, ((q, hawttrend) for hawttrend in hawttrends))
+    pool.map(_work, hawttrends)
     pool.close()
     pool.join()
-    data = []
-    for d in iter(q.queue):
-        data.append(d)
-    return data
+    return sum(T_Q.queue)
