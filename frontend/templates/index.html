@@ -1,0 +1,67 @@
+{% extends '_extend/base.html' %}
+
+{% block extra_head %}
+    {% if documents.has_previous %}
+        <link rel="prev" href="?page={{ documents.previous_page_number }}" />
+    {% endif %}
+    {% if documents.has_next %}
+        <link rel="next" href="?page={{ documents.next_page_number }}" />
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include '_include/navbar.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">Top 4{% if country_name %} for {{ country_name }}{% endif %}</h1>
+
+                {% include '_include/sidebar.html' %}
+
+                <div class="row placeholders">
+                    {% for document in top_documents %}
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img height="300" class="img-responsive" alt="{{ document.title }}"
+                                 src="{% if document.picture_url %}{{ document.picture_url }}{% else %}https://placeholdit.imgix.net/~text?txtsize=20&txt=Unknown&w=100&h=100{% endif %}">
+                            <h4><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></h4>
+                            <span class="text-muted">{{ document.snippet|truncatechars:80 }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <h2 class="sub-header">Hot trends{% if country_name %} for {{ country_name }}{% endif %}</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Picture</th>
+                            <th>Snippet</th>
+                            <th>Traffic</th>
+                            <th>Published</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for document in documents %}
+                            <tr>
+                                <td><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></td>
+                                <td>
+                                    <img height="300" class="img-responsive" alt="{{ document.title }}"
+                                         src="{% if document.picture_url %}{{ document.picture_url }}{% else %}https://placeholdit.imgix.net/~text?txtsize=20&txt=Unknown&w=100&h=100{% endif %}">
+                                </td>
+                                <td>{{ document.snippet }}</td>
+                                <td>{{ document.approx_traffic }}</td>
+                                <td>{{ document.published }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {% include '_include/paginator.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

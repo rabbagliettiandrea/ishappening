@@ -1,0 +1,6 @@
+postgresql-9.3
+python-virtualenv
+postgresql-common
+postgresql-server-dev-all
+python-dev
+redis-server

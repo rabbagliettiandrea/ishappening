@@ -1,5 +1,4 @@
 .*
-!.gitkeep
 !/.gitignore
 *.py[cod]
 *.eml
@@ -16,5 +15,6 @@ _dist
 *.rdb
 Thumbs.db
 vendor
+/static
 Thumbs.db
 .DS_STORE
