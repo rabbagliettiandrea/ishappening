@@ -16,8 +16,8 @@ class Document(TimedatedModel):
     approx_traffic = PositiveIntegerField()
     country_id = PositiveIntegerField(db_index=True)
     published = DateTimeField()
-    internal_url = URLField(db_index=True, unique=True, max_length=600)
-    external_url = URLField(db_index=True, unique=True, max_length=600)
+    internal_url = URLField(db_index=True, unique=True, max_length=1024)
+    external_url = URLField(db_index=True, unique=True, max_length=1024)
 
     class Meta:
         ordering = ['-published']

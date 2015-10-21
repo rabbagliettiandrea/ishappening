@@ -7,6 +7,7 @@ from httplib import HTTPException
 from multiprocessing.pool import ThreadPool
 from urlparse import urlparse
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.db import IntegrityError
 from django.db.models import Q
 import feedparser
@@ -74,9 +75,8 @@ def _work(country_id):
 
 def grab_documents(clear_before):
     clear_before and Document.objects.all().delete()
-    hawttrends = requests.get('http://hawttrends.appspot.com/api/terms/').json()
-    pool = ThreadPool(processes=len(hawttrends))
-    pool.map(_work, hawttrends)
+    pool = ThreadPool(processes=len(settings.COUNTRY_MAP))
+    pool.map(_work, settings.COUNTRY_MAP.iterkeys())
     pool.close()
     pool.join()
     return sum(T_Q.queue)
