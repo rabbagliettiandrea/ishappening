@@ -20,7 +20,9 @@
     {% block extra_head %}
     {% endblock %}
 
-    {% include '_include/ga.html' %}
+    {% if not settings.DEBUG %}
+        {% include '_include/ga.html' %}
+    {% endif %}
 </head>
 
 <body>
