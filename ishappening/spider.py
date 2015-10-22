@@ -33,8 +33,8 @@ def _work(country_id):
             if not html_title or not external_url:
                 continue
             parsed_uri = urlparse(external_url)
-            internal_url = parsed_uri.query and '%s?%s' % (parsed_uri.path.lstrip('/'), parsed_uri.query) \
-                           or parsed_uri.path.lstrip('/')
+            internal_url = parsed_uri.query and '%s?%s' % (parsed_uri.path.strip('/'), parsed_uri.query) \
+                           or parsed_uri.path.strip('/')
             if Document.objects.filter(
                     Q(internal_url=internal_url) | Q(external_url=external_url)).exists():
                 continue
