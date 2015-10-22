@@ -2,9 +2,10 @@
 
 from __future__ import unicode_literals, division, absolute_import
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.text import slugify
 from django.views.decorators.cache import cache_page
 from ishappening.models import Document
@@ -41,4 +42,7 @@ def help(request):
 
 @cache_page(settings.CACHE_EXPIRE_TIME)
 def serve_document(request, country_slug, internal_url):
-    return HttpResponse(Document.objects.get(internal_url=internal_url).html)
+    try:
+        return HttpResponse(Document.objects.get(internal_url=internal_url).html)
+    except ObjectDoesNotExist:
+        return redirect('index_generic')
