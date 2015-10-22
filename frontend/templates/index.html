@@ -1,6 +1,8 @@
 {% extends '_extend/base.html' %}
 
-{% block title %}{{ country_name }}{% endblock %}
+{% if country_name %}
+{% block title %} in {{ country_name }}{% endblock %}
+{% endif %}
 
 {% block extra_head %}
     {% if documents.has_previous %}
