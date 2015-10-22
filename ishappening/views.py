@@ -16,7 +16,7 @@ def index(request, country_slug=None):
             country_id_found = country_id
             break
     query_kwargs = country_id_found and {'country_id': country_id_found} or {}
-    country_name = settings.COUNTRY_MAP.get(country_id_found)
+    country_name = settings.COUNTRY_MAP.get(country_id_found, '')
     documents = Document.objects.filter(**query_kwargs)
     top_documents, documents = documents[:4], documents[4:]
     paginator = Paginator(documents, 20)
