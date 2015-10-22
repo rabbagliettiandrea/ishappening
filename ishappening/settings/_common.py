@@ -6,7 +6,7 @@ from django.utils.functional import SimpleLazyObject
 import os
 
 
-ADMINS = [('Andrea', 'rabbagliettiandrea@gmail.com')]
+# ADMINS = [('Andrea', 'rabbagliettiandrea@gmail.com')]
 DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = 'x5+_bdfc3co*^!5)s-29#rib97pz^bqoxyt3_a^$r8c58@gvd2'
