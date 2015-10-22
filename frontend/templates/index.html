@@ -1,5 +1,7 @@
 {% extends '_extend/base.html' %}
 
+{% block title %}{{ country_name }}{% endblock %}
+
 {% block extra_head %}
     {% if documents.has_previous %}
         <link rel="prev" href="?page={{ documents.previous_page_number }}" />
