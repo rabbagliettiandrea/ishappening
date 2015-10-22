@@ -6,6 +6,7 @@ from django.utils.functional import SimpleLazyObject
 import os
 
 
+ADMINS = [('Andrea', 'rabbagliettiandrea@gmail.com')]
 DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = 'x5+_bdfc3co*^!5)s-29#rib97pz^bqoxyt3_a^$r8c58@gvd2'
@@ -30,6 +31,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware'
 ]
+X_FRAME_OPTIONS = 'DENY'
 ROOT_URLCONF = 'ishappening.urls'
 TEMPLATES = [
     {
@@ -118,7 +120,6 @@ LOGGING = {
     }
 }
 CACHE_EXPIRE_TIME = timedelta(days=7).total_seconds()
-CACHE_EXPIRE_TIME_RENDERS = timedelta(days=1).total_seconds()
 SESSION_COOKIE_AGE = timedelta(weeks=4).total_seconds()
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'session'
