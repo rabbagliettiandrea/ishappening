@@ -4,7 +4,7 @@ from __future__ import unicode_literals, division, absolute_import
 from ishappening.settings._common import *
 
 
-DEBUG = False
+DEBUG = True
 DATABASES['default']['CONN_MAX_AGE'] = 600
 for TEMPLATE in TEMPLATES:
     TEMPLATE['options']['loaders'] = \
