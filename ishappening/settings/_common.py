@@ -47,7 +47,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django_zilla.utils.context_processors.get__settings',
                 'django_zilla.utils.context_processors.get__datetime_now',
-                'django_zilla.utils.context_processors.get__user_is_logged'
+                'django_zilla.utils.context_processors.get__client_is_logged'
             ],
         },
     },
