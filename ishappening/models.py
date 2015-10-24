@@ -25,6 +25,11 @@ class Document(TimedatedModel):
     def __unicode__(self):
         return self.title
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if not self.internal_url:
+            self.internal_url = slugify(self.title)
+        super(Document, self).save(force_insert, force_update, using, update_fields)
+
     def get_absolute_url(self):
         return reverse(
             'serve_document', args=[slugify(settings.COUNTRY_MAP[self.country_id]), self.internal_url])
