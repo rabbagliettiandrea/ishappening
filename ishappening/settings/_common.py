@@ -205,3 +205,4 @@ COUNTRY_MAP = {
     1: 'United States',
     28: 'Vietnam'
 }
+STATIC_DIST_ROOT = os.path.join(BASE_DIR, 'frontend', 'static', '_dist')
