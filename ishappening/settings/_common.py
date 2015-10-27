@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     'ishappening'
 ]
 MIDDLEWARE_CLASSES = [
-    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,7 +49,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django_zilla.utils.context_processors.get__settings',
                 'django_zilla.utils.context_processors.get__datetime_now',
-                'django_zilla.utils.context_processors.get__client_is_logged'
+                'django_zilla.utils.context_processors.get__client_is_logged',
+                'django_zilla.utils.context_processors.get__base_url'
             ],
         },
     },
