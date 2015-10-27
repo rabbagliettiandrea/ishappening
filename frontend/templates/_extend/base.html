@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <meta property="og:title" content="IsHappening.World {% if country_name %} in {{ country_name }}{% endif %}"/>
+    <meta property="og:image" content="{% static 'world_view.jpg' %}"/>
+    <meta property="og:description" content="What's happening in the world right now?"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="product"/>
+    <meta property="og:site_name" content="IsHappening.World"/>
+
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEStNFw0oTh8JJk0fBSNMHwEfShQAAAAAAAAAAAAeMQEALksaAC5LGgAfMgEAAAAAAAAAAAAAAAAAAAAAAAAAADaA5uIod+T/HG7h/xBm3/8EX97JAD1mFAB/yZIAi9/sAInd/wCI3f8AiN3sAGutYwAAAAAAAAAAAAAAAAAAAAAvbsNyK3nk/hxu4f8SaeD/CXPhuwCV5eQAkuP/AJDi/wCN4P8Ait7/AIjd/wBnpWkAAAAAAAAAAAAAAAAAAAAAAAAAABpHgzoZUpxqGWrMlwOW6P8Amej/AJfm/wCU5P8AkeL/AI7h/wCN4PsAPWEZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/uXUAoOz/AJ7q/wCb6P8AmOf/AJbl/wCT4/8Aj92wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApu/GAKXu/wCi7f8An+v/AJzp/wCa6P8AmOb/Ame8bgAAAAA2KhEXX0odOGpTHlGeeyulAAAAAAAAAAAAAAAAAKvz6QCp8f8Apu//AKPu/wCh7P8Anur/BJDn/wZf3swAAAAAZlAiTK6IN89nUSA3qIMx4gAAAAAAAAAAAAAAAACw9eAArfT/AKry/wCo8P8Ape//AKPt/xF24/8JZNiiAAAAAF5KID61jj7aZU8hLq6JOOkAAAAAAAAAAAAAAAAArOyrALH2/wCv9f8ArPP/AKnx/weW3KQXUZhdAxw+CAAAAACkgTuKtI9DpXxhKlm1jz7GAAAAAAAAAAAAAAAAAHObQwC2+f4As/f/ALD2/wCw88kAMUUGAAAAACoiEQKYeTtjxZ1N8YhsNCy3kUK9m3w6dgAAAAAAAAAAAAAAAAAAAAAArumcALf6/wC3+N4AVHQaAAAAAAAAAADOpliqz6ZZ3px9QUCmhEBuxZ1O4kY4Gw0AAAAAAAAAAAAAAAAAAAAAACk3AwCi13kAWXgcAAAAAAAAAAAAAAAAUEAiD4tvOxu5k0yUzqVX7IFoNjMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFdGJhvasGP40alerWtWLyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATj8jCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAAEHwAAgB8AAOAfAADwHwAA4D4AAOAaAADgGgAA4HIAAPD1AADxzQAA//MAAP/nAAD//wAA//8AAA==" />
     <title>IsHappening.World {% block title %}{% endblock %}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
