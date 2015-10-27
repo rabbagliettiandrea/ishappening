@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'ishappening'
 ]
 MIDDLEWARE_CLASSES = [
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
