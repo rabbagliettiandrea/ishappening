@@ -10,7 +10,7 @@ class DocumentsSitemap(Sitemap):
     changefreq = "daily"
 
     def items(self):
-        return Document.objects.all().only('timestamp_modified', 'approx_traffic')
+        return Document.objects.all().only('timestamp_modified')
 
     def lastmod(self, obj):
         return obj.timestamp_modified
