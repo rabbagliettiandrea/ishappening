@@ -16,7 +16,7 @@ class DocumentsSitemap(Sitemap):
         return obj.timestamp_modified
 
     def location(self, obj):
-        return obj.get_absolute_url()
+        return obj.title
 
     def priority(self, obj):
         return 0.5
