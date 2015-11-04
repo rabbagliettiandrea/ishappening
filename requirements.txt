@@ -2,7 +2,7 @@ Django>=1.8
 Fabric>=1.10
 psycopg2==2.6
 pycrypto>=2.6.1
--e git+https://github.com/codezilla-it/django-zilla.git#egg=django-zilla
+-e git+https://github.com/silverfix/django-zilla.git#egg=django-zilla
 redis
 django-redis-cache
 hiredis
