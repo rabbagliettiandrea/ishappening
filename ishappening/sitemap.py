@@ -6,7 +6,7 @@ from ishappening.models import Document
 
 
 class DocumentsSitemap(Sitemap):
-    limit = 800
+    limit = 1500
     changefreq = "daily"
 
     def items(self):
