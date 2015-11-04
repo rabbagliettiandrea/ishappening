@@ -11,6 +11,7 @@ class DocumentsSitemap(Sitemap):
     changefreq = "daily"
 
     def items(self):
+        self.approx_traffic_max = Document.objects.aggregate(Max('approx_traffic'))['approx_traffic__max']
         return Document.objects.all().only('timestamp_modified', 'approx_traffic')
 
     def lastmod(self, obj):
@@ -20,7 +21,7 @@ class DocumentsSitemap(Sitemap):
         return obj.get_absolute_url()
 
     def priority(self, obj):
-        return obj.approx_traffic / Document.objects.aggregate(Max('approx_traffic'))['approx_traffic__max']
+        return obj.approx_traffic / self.approx_traffic_max
 
 
 sitemap_dict = {
