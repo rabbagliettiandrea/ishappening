@@ -9,6 +9,7 @@ from ishappening import settings
 
 
 class Document(TimedatedModel):
+
     title = TextField()
     picture_url = URLField(blank=True, max_length=600)
     html = TextField()
