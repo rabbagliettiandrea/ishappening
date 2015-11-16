@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.text import slugify
-from django.views.decorators.cache import cache_page
 from ishappening.models import Document
 
 
@@ -40,7 +39,6 @@ def help(request):
     return render(request, 'help.html')
 
 
-@cache_page(settings.CACHE_EXPIRE_TIME)
 def serve_document(request, country_slug, internal_url):
     try:
         return HttpResponse(Document.objects.get(internal_url=internal_url).html)
