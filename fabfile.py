@@ -5,4 +5,4 @@ from fabric.contrib import django as fab_django
 
 fab_django.settings_module('ishappening.settings')
 
-from django_zilla.fabric_tasks import misc, git, db, migrations
+from django_zilla.fabric_tasks import misc, git, db, migrations, srv
